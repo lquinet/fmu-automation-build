@@ -10,6 +10,7 @@ services:
       - BUILDBOT_WORKER_PORT=9989
       - BUILDBOT_WEB_URL=http://localhost:8010/
       - BUILDBOT_WEB_PORT=tcp:port=8010
+      - BUILDBOT_WORKER_WORKDIR=$BUILDBOT_WORKER_WORKDIR
     links:
       - db
     depends_on:
@@ -26,13 +27,14 @@ services:
   worker:
     image: "lquinet/buildbot-worker"
     environment:
-      BUILDMASTER: buildbot
-      BUILDMASTER_PORT: 9989
-      WORKERNAME: example-worker
-      WORKERPASS: pass
-      WORKER_ENVIRONMENT_BLACKLIST: DOCKER_BUILDBOT* BUILDBOT_ENV_* BUILDBOT_1* WORKER_ENVIRONMENT_BLACKLIST
+      - BUILDMASTER=buildbot
+      - BUILDMASTER_PORT=9989
+      - WORKERNAME=example-worker
+      - WORKERPASS=pass
+      - WORKER_ENVIRONMENT_BLACKLIST=DOCKER_BUILDBOT* BUILDBOT_ENV_* BUILDBOT_1* WORKER_ENVIRONMENT_BLACKLIST
+      - FMU_CLOUD_HOSTNAME=$FMU_CLOUD_HOSTNAME
     volumes:
-      - "/media/lquinet/ca7c8af6-d553-466c-bd64-40c7508053e6/FullMetalUpdate_fork_2:/media/lquinet/ca7c8af6-d553-466c-bd64-40c7508053e6/FullMetalUpdate_fork_2"
+      - "$BUILDBOT_WORKER_WORKDIR:$BUILDBOT_WORKER_WORKDIR"
       - "/var/run/docker.sock:/var/run/docker.sock"
     links:
       - buildbot
