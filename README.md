@@ -81,5 +81,7 @@ You can also change other parameters in this file such as BUILDBOT_WEB_PORT (por
 
 ## Improvements
 
-* Automate SD card image flashing as soon as a new image is builded
-* Track other repositories than https://github.com/FullMetalUpdate/meta-fullmetalupdate-extra. Typically all repositories defined by the manifests in https://github.com/FullMetalUpdate/manifest. This implies to add more change sources (one for each repo) and schedulers (one for each branch)
+* **Deploy** : Automate SD card image flashing as soon as a new image is builded
+* **Track other repositories** than https://github.com/FullMetalUpdate/meta-fullmetalupdate-extra. Typically all repositories defined by the manifests in https://github.com/FullMetalUpdate/manifest. This implies to add more change sources (one for each repo) and schedulers (one for each branch)
+* **Setup reporters**: build status on GitHub, a mail notifier, an IRC notifier, ...
+* **Test**: test if the build is running properly on the target
