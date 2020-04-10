@@ -25,6 +25,10 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh \
 RUN groupadd docker \
     ; usermod -aG docker buildbot
 
+# Install txrequests for to allow interaction with GitHub REST API
+# In order to use  GitHubStatusPush (Python 2?)
+RUN pip install txrequests
+
 # Switch to regular user for security reasons
 USER buildbot
 WORKDIR /buildbot
