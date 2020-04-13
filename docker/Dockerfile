@@ -7,7 +7,7 @@ USER root
 # This will make apt-get install without question
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Install packages
+# Install packages for FMU
 RUN apt-get -yqq update \
     && apt-get -yqq install \
         python3 \
@@ -24,10 +24,6 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh \
 # Allow buildbot user to use docker
 RUN groupadd docker \
     ; usermod -aG docker buildbot
-
-# Install txrequests for to allow interaction with GitHub REST API
-# In order to use  GitHubStatusPush
-RUN pip3 install txrequests
 
 # Switch to regular user for security reasons
 USER buildbot
