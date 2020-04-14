@@ -1,7 +1,7 @@
 version: '2'
 services:
   buildbot:
-    image: buildbot/buildbot-master:master
+    image: lquinet/buildbot-master
     env_file:
       - db.env
     environment:
@@ -11,6 +11,8 @@ services:
       - BUILDBOT_WEB_URL=http://localhost:8010/
       - BUILDBOT_WEB_PORT=tcp:port=8010
       - BUILDBOT_WORKER_WORKDIR=$BUILDBOT_WORKER_WORKDIR
+      - SMTP_PWD=$SMTP_PWD
+      - GITHUB_TOKEN=$GITHUB_TOKEN
     links:
       - db
     depends_on:
