@@ -16,7 +16,7 @@ You have also to additionnaly install docker-compose:
 pip install docker-compose
 ```
 
-Test docker is happy in your environment:
+Test if docker is running:
 
 ```sh
 sudo docker run -i busybox /bin/echo Success
@@ -39,10 +39,11 @@ $ git clone https://github.com/lquinet/fmu-automation-build.git
 $ cd fmu-automation-build
 ```
 
-Before launching buildbot you have to configure the two variables in the [.env](docker/.env) file:
+Before launching buildbot you have to configure the variables in the [.env](docker/master/.env) file:
 
 * **BUILDBOT_WORKER_WORKDIR** : working directory of the worker. It will store all build files in that directory 
-* **FMU_CLOUD_HOSTNAME** : hostname of FMU cloud server. If you launched it on you local machine you can get thanks to the `hostname`command.
+* **FMU_CLOUD_HOSTNAME** : hostname of FMU cloud server. If you launched it on you local machine you can get it thanks to the `hostname`command.
+* **GITHUB_TOKEN** : GitHub API token to push build status to the repository.
 
 Once you have done it, you can launch buildbot:
 
@@ -62,9 +63,14 @@ If you want to customise the behavior of buildbot, you have to modify the [maste
 
 In this file you can modify workers behavior, changes sources, schedulers, builders, and so on.
 
-The most usefull thing to modify is the BRANCH_MACHINE_PAIRS variable. This is this variable which defines the branches of meta-fullmetalupdate-extra to track and the dependant machines.
+There are some custom variables:
+
+* **REPO_URL**: URL of the repository to track for changes.
+* **BRANCH_MACHINE_PAIRS**: Defines the branches of *REPO_URL* to track and the dependant machines.
+* **YOCTO_REPO_URL**: URL of the local server repository of FMU.
 
 ```python
+REPO_URL="https://github.com/lquinet/meta-fullmetalupdate-extra.git"
 SUPPORTED_MACHINES_ROCKO=["imx6qdlsabresd", "raspberrypi3"]
 SUPPORTED_MACHINES_THUD=["imx8mqevk", "stm32mp1-disco"]
 SUPPORTED_MACHINES_WARRIOR=["imx8mqevk"]
@@ -73,11 +79,14 @@ BRANCH_MACHINE_PAIRS = {
     "thud" : SUPPORTED_MACHINES_THUD,
     "warrior" : SUPPORTED_MACHINES_WARRIOR,
 }
+YOCTO_REPO_URL="https://github.com/lquinet/fullmetalupdate-yocto-demo.git"
 ```
 
-### docker-compose.yml
+### docker-compose.yml and .env
 
 You can also change other parameters in this file such as BUILDBOT_WEB_PORT (port of web page), BUILDBOT_WORKER_PORT, etc.
+
+The [docker-compose.yml](docker/master/docker-compose.yml) file depends on the [.env](docker/master/.env) file.
 
 ## Improvements
 
