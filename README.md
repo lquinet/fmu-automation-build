@@ -56,6 +56,21 @@ You should now be able to go to http://localhost:8010, where you will see a web 
 
 ![Image not found](images/index.png)
 
+### GitHub integration
+
+A reporter is configured to publishes build status using GitHub Status API. In order to use it, you have to provide a token to your GitHub account via the *GITHUB_TOKEN* variable in the [.env](docker/master/.env) file. To get a token on GitHub go to 
+https://github.com/settings/tokens and click on "Generate new token". Be sure to enable enough scopes for your personnal token.
+
+Once you have provided it, you should see build status appearing on your commits like that:
+
+![Image not found](images/GitHub-build-status.png)
+
+### CI/CD badge
+
+The CI badge of all builders are available at http://<buildbotURL>/badges/<buildername>.svg.
+
+![Image not found](images/CI-badge.png)
+
 ## Customisation
 
 ### master.cfg
