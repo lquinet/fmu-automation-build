@@ -4,7 +4,9 @@ This project allows to automate builds for fullmetalupdate. Each time there is a
 
 This project is using buildbot, running in docker containers. For more documentation about buildbot go to https://docs.buildbot.net/current/tutorial/docker.html.
 
-This project has only been tested on Linux.
+The particularity of docker in this project is that the buildbot worker container has to run a container from FMU. We are therefore using **DooD (Docker outside of Docker)** by bind-mounting host docker socket. Be aware that containers will be able to start “sibling” containers and not child containers (which can cause volume mouting, device access and network problems). More information on DooD at https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/.
+
+This project has only been tested on Linux, but given that all is running in containers that shouldn't be an issue.
 
 ## Prerequisites
 
