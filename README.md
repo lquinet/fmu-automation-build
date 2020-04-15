@@ -69,7 +69,7 @@ Once you have provided it, you should see build status appearing on your commits
 
 ### CI/CD badge
 
-The CI badge of all builders are available at http://<buildbotURL>/badges/<buildername>.svg.
+The CI badge of all builders are available at http://\<buildbotURL\>/badges/\<buildername\>.svg.
 
 ![Image not found](images/CI-badge.png)
 
