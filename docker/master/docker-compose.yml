@@ -36,12 +36,15 @@ services:
       - WORKER_ENVIRONMENT_BLACKLIST=DOCKER_BUILDBOT* BUILDBOT_ENV_* BUILDBOT_1* WORKER_ENVIRONMENT_BLACKLIST
       - BUILDBOT_WORKER_WORKDIR=$BUILDBOT_WORKER_WORKDIR
       - FMU_CLOUD_HOSTNAME=$FMU_CLOUD_HOSTNAME
-      - SD_CARD_PATH=$SD_CARD_PATH
+      - SD_CARD_DEV_PATH=$SD_CARD_DEV_PATH
     volumes:
       - "$BUILDBOT_WORKER_WORKDIR:$BUILDBOT_WORKER_WORKDIR"
       # Bind-mounting host docker socket to perform DooD (Docker outside of Docker)
       # The container will be able to start “sibling” containers and not child containers
       # See https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
       - "/var/run/docker.sock:/var/run/docker.sock"
+    devices:
+      - "$SD_CARD_DEV_PATH:$SD_CARD_DEV_PATH"
+
     links:
       - buildbot
