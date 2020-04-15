@@ -25,8 +25,8 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh \
 RUN groupadd docker \
     ; usermod -aG docker buildbot
 
-# Switch to regular user for security reasons
-USER buildbot
+# Switch to root to have all permissions (need to use dd command, etc.)
+USER root
 WORKDIR /buildbot
 
 CMD ["/usr/bin/dumb-init", "twistd", "--pidfile=", "-ny", "buildbot.tac"]
