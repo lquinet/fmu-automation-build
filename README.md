@@ -42,6 +42,7 @@ $ cd fmu-automation-build
 Before launching buildbot you have to configure the variables in the [.env](docker/master/.env) file:
 
 * **BUILDBOT_WORKER_WORKDIR** : working directory of the worker. It will store all build files in that directory 
+* **SD_CARD_DEV_PATH** : path of SD card device to flash the image builded. :warning: :warning: BE REALLY CAREFULL WITH THIS PATH, CHOOSING A WRONG DEVICE PATH COULD ENTIRELY DAMAGE YOUR HOST MACHINE (E.G. ROOT PARTITION) :warning: :warning:
 * **FMU_CLOUD_HOSTNAME** : hostname of FMU cloud server. If you launched it on you local machine you can get it thanks to the `hostname`command.
 * **GITHUB_TOKEN** : GitHub API token to push build status to the repository.
 
